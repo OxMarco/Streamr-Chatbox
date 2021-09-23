@@ -1,0 +1,308 @@
+@import "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css";
+
+$base-height: 377px;
+$base-dimension: 16px;
+$base-border-radius: 12px;
+$base-button-size: 52px;
+$primary-color: #0360a5;
+$background-color: #fff;
+$font-color: #888;
+
+@mixin chabox-container {
+  display: flex;
+  position: absolute;
+  box-shadow: 5px 5px 25px 0 rgba(46, 61, 73, 0.2);
+  flex-direction: column;
+}
+
+@mixin chatbox-header {
+  box-sizing: border-box;
+  display: flex;
+  width: 100%;
+  padding: $base-dimension;
+  color: $background-color;
+  background-color: $primary-color;
+  align-items: center;
+  justify-content: space-around;
+}
+
+@mixin chatbox-main {
+  box-sizing: border-box;
+  width: 100%;
+  padding: calc(2 * #{$base-dimension}) #{$base-dimension};
+  line-height: calc(#{$base-dimension} + #{$base-dimension} / 2);
+  color: $font-color;
+  text-align: center;
+}
+
+@mixin chatbox-footer {
+  box-sizing: border-box;
+  display: flex;
+  width: 100%;
+  padding: $base-dimension;
+  border-top: 1px solid #ddd;
+  align-items: center;
+  justify-content: space-around;
+}
+
+@mixin chatbox-floating-button {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: $base-button-size;
+  height: $base-button-size;
+  color: $background-color;
+  background-color: $primary-color;
+  background-position: center center;
+  background-repeat: no-repeat;
+  box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.15);
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.chatbox-title {
+  margin: 0;
+  font-size: $base-dimension;
+  line-height: 1;
+}
+
+button {
+  color: inherit;
+  background-color: transparent;
+  border: 0;
+  outline: 0 !important;
+  cursor: pointer;
+
+  &.chatbox-open {
+    @include chatbox-floating-button;
+    margin: $base-dimension;
+  }
+
+  &.chatbox-close {
+    @include chatbox-floating-button;
+    display: none;
+    margin: $base-dimension calc(2 * #{$base-dimension} + #{$base-button-size})
+      $base-dimension $base-dimension;
+  }
+}
+
+.chatbox-input {
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0;
+  height: calc(#{$base-dimension} + #{$base-dimension} / 2);
+  padding: 0 calc(#{$base-dimension} / 2);
+  font-family: inherit;
+  font-size: $base-dimension;
+  line-height: calc(#{$base-dimension} + #{$base-dimension} / 2);
+  color: $font-color;
+  background-color: none;
+  border: 0;
+  outline: 0 !important;
+  resize: none;
+  overflow: hidden;
+
+  &::placeholder {
+    color: $font-color;
+  }
+}
+
+.chatbox-msglist {
+  list-style: none;
+  padding-left: 0px;
+}
+
+.clearfix:after {
+  visibility: hidden;
+  display: block;
+  font-size: 0;
+  content: " ";
+  clear: both;
+  height: 0;
+}
+
+.chatbox-popup__header {
+  @include chatbox-header;
+  border-top-right-radius: $base-border-radius;
+  border-top-left-radius: $base-border-radius;
+
+  .chatbox-popup__avatar {
+    margin-top: -32px;
+    background-color: $primary-color;
+    border: 5px solid rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+  }
+}
+
+.chatbox-popup__main {
+  @include chatbox-main;
+}
+
+.chatbox-popup__history {
+  padding: 30px 30px 20px;
+  border-bottom: 2px solid white;
+  overflow-y: scroll;
+  height: 250px;
+}
+
+.chatbox-popup__footer {
+  @include chatbox-footer;
+  border-bottom-right-radius: $base-border-radius;
+  border-bottom-left-radius: $base-border-radius;
+}
+
+.chatbox-panel__header {
+  @include chatbox-header;
+  flex: 0 0 auto;
+}
+
+.chatbox-panel__main {
+  @include chatbox-main;
+  flex: 1 1 auto;
+}
+
+.chatbox-panel__history {
+  padding: 30px 30px 20px;
+  border-bottom: 2px solid white;
+  overflow-y: scroll;
+  height: 60vh;
+}
+
+.chatbox-panel__history {
+  padding: 30px 30px 20px;
+  border-bottom: 2px solid white;
+  overflow-y: scroll;
+  height: 60vh;
+}
+
+.chatbox-panel__footer {
+  @include chatbox-footer;
+  flex: 0 0 auto;
+}
+
+.chatbox-show {
+  -webkit-animation: display 0.2s linear forwards;
+  animation: display 0.2s linear forwards;
+  display: block !important;
+}
+
+.chatbox-hide {
+  -webkit-animation: fadeinout 0.2s linear forwards;
+  animation: fadeinout 0.2s linear forwards;
+  display: none !important;
+}
+
+.chatbox-message-self {
+  background: #94c2ed;
+  float: right;
+  color: white;
+  padding: 18px 20px;
+  line-height: 26px;
+  font-size: 16px;
+  border-radius: 7px;
+  margin-bottom: 30px;
+  width: 70%;
+  position: relative;
+}
+
+.chatbox-message-self:after {
+  bottom: 100%;
+  left: 7%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+  border-bottom-color: #86bb71;
+  border-width: 10px;
+  margin-left: -10px;
+  border-bottom-color: #94c2ed;
+  left: 93%;
+}
+
+.chatbox-message-self-data {
+  margin-bottom: 15px;
+  text-align: right;
+}
+
+.chatbox-message {
+  background: #86bb71;
+  float: left;
+  color: white;
+  padding: 18px 20px;
+  line-height: 26px;
+  font-size: 16px;
+  border-radius: 7px;
+  margin-bottom: 30px;
+  width: 70%;
+  position: relative;
+}
+
+.chatbox-message:after {
+  bottom: 100%;
+  left: 7%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+  border-bottom-color: #86bb71 !important;
+  border-width: 10px;
+  margin-left: -10px;
+}
+
+.chatbox-message-data {
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+@-webkit-keyframes fadeinout {
+  0% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 0.2;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes fadeinout {
+  0% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 0.2;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes display {
+  0% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes display {
+  0% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 1;
+  }
+}
