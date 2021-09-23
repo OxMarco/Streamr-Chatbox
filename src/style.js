@@ -30,7 +30,7 @@ export const ChatboxBase = styled.div`
 
 export const Button = styled.button`
   color: inherit;
-  backgroundcolor: transparent;
+  background-color: transparent;
   border: 0;
   outline: 0 !important;
   cursor: pointer;

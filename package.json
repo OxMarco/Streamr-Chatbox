@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "A fully decentralised chatbox powered by Streamr",
   "author": "grcasanova",
-  "license": "GPL3",
+  "license": "GPLv3",
   "repository": "https://github.com/grcasanova/Streamr-Chatbox",
   "main": "dist/index.js",
   "module": "dist/index.modern.js",
@@ -51,6 +51,9 @@
     "dist"
   ],
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.36",
+    "@fortawesome/free-solid-svg-icons": "^5.15.4",
+    "@fortawesome/react-fontawesome": "^0.1.15",
     "@yaireo/relative-time": "^1.0.1",
     "dompurify": "^2.3.3",
     "node-sass": "^6.0.1",

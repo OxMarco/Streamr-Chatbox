@@ -3,6 +3,9 @@ import StreamrClient from "streamr-client";
 import PropTypes from "prop-types";
 import DOMPurify from "dompurify";
 import RelativeTime from "@yaireo/relative-time";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faComment, faTimes, faUserCircle, faWindowMaximize, faWindowRestore, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import Wallet from "./components/Wallet";
 import "./Chatbox.scss";
 import {
@@ -29,6 +32,8 @@ import {
   PanelHistory,
   PanelFooter,
 } from "./style";
+
+library.add(faComment, faTimes, faUserCircle, faWindowMaximize, faWindowRestore, faPaperPlane);
 
 function Chatbox({ theme, provider, address, streamID, DEBUG = true }) {
   const [messages, setMessages] = useState([]);
@@ -62,7 +67,7 @@ function Chatbox({ theme, provider, address, streamID, DEBUG = true }) {
           );
 
           const msg = {
-            type: from === address ? true : false,
+            self: from === address.toLowerCase() ? true : false,
             from: from,
             text: cleanText,
             when: time,
@@ -230,16 +235,15 @@ function Chatbox({ theme, provider, address, streamID, DEBUG = true }) {
   return (
     <ChatboxBase>
       <ChatboxOpen onClick={handleOpen} open={open}>
-        <i className="fa fa-comment fa-2x" aria-hidden="true"></i>
+        <FontAwesomeIcon icon={['fa', 'comment']} size="2x" />
       </ChatboxOpen>
       <ChatboxClose onClick={handleClose} open={close}>
-        <i className="fa fa-times fa-2x" aria-hidden="true"></i>
+        <FontAwesomeIcon icon={['fa', 'times']} size="2x" />
       </ChatboxClose>
       <ChatboxPopup open={popup}>
         <ChatboxPopupHeader>
           <aside style={{ flex: 3 }}>
-            <i
-              className="fa fa-user-circle fa-4x"
+            <FontAwesomeIcon icon={['fa', 'user-circle']} size="4x" 
               aria-hidden="true"
               style={{
                 marginTop: "-32px",
@@ -247,7 +251,7 @@ function Chatbox({ theme, provider, address, streamID, DEBUG = true }) {
                 border: "5px solid rgba(0,0,0,0.1)",
                 borderRadius: "50%",
               }}
-            ></i>
+            />
           </aside>
           <aside style={{ flex: 8 }}>
             <ChatboxTitle>
@@ -258,7 +262,7 @@ function Chatbox({ theme, provider, address, streamID, DEBUG = true }) {
           </aside>
           <aside style={{ flex: 1 }}>
             <Button onClick={handleMaximise}>
-              <i className="fa fa-window-maximize" aria-hidden="true"></i>
+              <FontAwesomeIcon icon={['fa', 'window-maximize']}/>
             </Button>
           </aside>
         </ChatboxPopupHeader>
@@ -312,11 +316,7 @@ function Chatbox({ theme, provider, address, streamID, DEBUG = true }) {
             ></ChatboxInput>
           </aside>
           <aside style={{ flex: 1, color: "#888", textAlign: "center" }}>
-            <i
-              className="fa fa-paper-plane"
-              aria-hidden="true"
-              onClick={handleSubmit}
-            ></i>
+            <FontAwesomeIcon icon={['fa', 'paper-plane']} onClick={handleSubmit} />
           </aside>
         </PopupFooter>
       </ChatboxPopup>
@@ -324,9 +324,7 @@ function Chatbox({ theme, provider, address, streamID, DEBUG = true }) {
       <ChatboxPanel open={panel}>
         <PanelHeader>
           <aside style={{ flex: 3 }}>
-            <i
-              className="fa fa-user-circle fa-3x"
-              aria-hidden="true"
+          <FontAwesomeIcon icon={['fa', 'user-circle']} size="3x"
               style={
                 max
                   ? {
@@ -342,7 +340,7 @@ function Chatbox({ theme, provider, address, streamID, DEBUG = true }) {
                       borderRadius: "50%",
                     }
               }
-            ></i>
+            />
           </aside>
           <aside style={{ flex: 6 }}>
             <ChatboxTitle>
@@ -353,10 +351,10 @@ function Chatbox({ theme, provider, address, streamID, DEBUG = true }) {
           </aside>
           <aside style={{ flex: 3, textAlign: "right" }}>
             <Button onClick={handleMinimise}>
-              <i className="fa fa-window-restore" aria-hidden="true"></i>
+              <FontAwesomeIcon icon={['fa', 'window-restore']} />
             </Button>
             <Button onClick={handleClosePanel}>
-              <i className="fa fa-times" aria-hidden="true"></i>
+              <FontAwesomeIcon icon={['fa', 'times']} />
             </Button>
           </aside>
         </PanelHeader>
@@ -408,11 +406,7 @@ function Chatbox({ theme, provider, address, streamID, DEBUG = true }) {
             ></ChatboxInput>
           </aside>
           <aside style={{ flex: 1, color: "#888", textAlign: "center" }}>
-            <i
-              className="fa fa-paper-plane"
-              aria-hidden="true"
-              onClick={handleSubmit}
-            ></i>
+            <FontAwesomeIcon icon={['fa', 'paper-plane']} onClick={handleSubmit} />
           </aside>
         </PanelFooter>
       </ChatboxPanel>

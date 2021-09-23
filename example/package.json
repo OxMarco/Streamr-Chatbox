@@ -2,6 +2,7 @@
   "name": "streamr-chatbox-example",
   "homepage": ".",
   "version": "0.0.0",
+  "license": "GPLv3",
   "private": false,
   "scripts": {
     "start": "node ../node_modules/react-scripts/bin/react-scripts.js start",
