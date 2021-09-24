@@ -25,6 +25,7 @@ const display = keyframes`
   `;
 
 export const ChatboxBase = styled.div`
+  word-wrap: break-word !important;
   font-family: "Lato", sans-serif;
 `;
 
@@ -177,12 +178,12 @@ export const MessageSelf = styled.div`
 `;
 
 export const MessageSelfData = styled.div`
-  margin-bottom: 15px;
+  margin-bottom: 10px;
   text-align: right;
 `;
 
 export const MessageData = styled.div`
-  margin-bottom: 15px;
+  margin-bottom: 10px;
   text-align: left;
 `;
 
@@ -284,7 +285,7 @@ export const ChatboxPopup = styled.section`
       ? `
       -webkit-animation: display .2s linear forwards;
       animation: display .2s linear forwards;
-      display: block !important;
+      display: flex !important;
       `
       : `
     -webkit-animation: fadeinout .2s linear forwards;
@@ -309,7 +310,7 @@ export const ChatboxPanel = styled.section`
       ? `
       -webkit-animation: display .2s linear forwards;
       animation: display .2s linear forwards;
-      display: block !important;
+      display: flex !important;
       `
       : `
     -webkit-animation: fadeinout .2s linear forwards;

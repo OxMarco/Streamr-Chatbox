@@ -7,7 +7,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faComment, faTimes, faUserCircle, faWindowMaximize, faWindowRestore, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import Wallet from "./components/Wallet";
-import "./Chatbox.scss";
 import {
   ChatboxBase,
   ChatboxClose,
@@ -220,6 +219,11 @@ function Chatbox({ theme, provider, address, streamID, DEBUG = true }) {
   };
 
   useEffect(() => {
+    var element = document.getElementById("scroll");
+    element.scrollTop = element.scrollHeight;
+  }, [messages]);
+
+  useEffect(() => {
     const listener = async (event) => {
       if (event.code === "Enter" || event.code === "NumpadEnter") {
         event.preventDefault();
@@ -268,7 +272,7 @@ function Chatbox({ theme, provider, address, streamID, DEBUG = true }) {
         </ChatboxPopupHeader>
 
         <ChatboxPopupMain>
-          <ChatBoxPopupHistory>
+          <ChatBoxPopupHistory id="scroll">
             <MsgList>
               {messages.length === 0 && (
                 <div>
@@ -360,7 +364,7 @@ function Chatbox({ theme, provider, address, streamID, DEBUG = true }) {
         </PanelHeader>
         <PanelMain style={{ flex: 1 }}>
           <PanelHistory>
-            <MsgList>
+            <MsgList id="scroll">
               {messages.length === 0 && (
                 <div>
                   A fully decentralised chatbox <br /> powered by Streamr.
