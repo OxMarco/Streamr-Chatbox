@@ -36,10 +36,10 @@
     <img src="images/logo.png" alt="Logo" width="80" height="80">
   </a>
 
-  <h3 align="center">project_title</h3>
+  <h3 align="center">Streamr decentralised chatbox</h3>
 
   <p align="center">
-    project_description
+    A simple plug&play ReactJS module to add a fully-decentralised and permissionless chatbox powered by [Streamr](https://streamr.network/).
     <br />
     <a href="https://github.com/github_username/repo_name"><strong>Explore the docs »</strong></a>
     <br />
@@ -51,7 +51,6 @@
     <a href="https://github.com/github_username/repo_name/issues">Request Feature</a>
   </p>
 </p>
-
 
 
 <!-- TABLE OF CONTENTS -->
@@ -87,17 +86,15 @@
 
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
 
-Here's a blank template to get started:
-**To avoid retyping too much info. Do a search and replace with your text editor for the following:**
-`github_username`, `repo_name`, `twitter_handle`, `email`, `project_title`, `project_description`
-
+Simply sign the challenge with your preferred wallet provider and you are ready to chat!
+If you got a ENS name for your wallet, it will be used on behalf of your wallet address. Chats are ephemeral, not logged or stored anywhere. Due to the decentralised nature of the tool, the content posted by users cannot be subject to moderation.
+The chat supports all UTF-8 characters and is language-agnostic. For security reasons you cannot use BBCode or HTML code, any spurious tag will be stripped out.
 
 ### Built With
 
-* []()
-* []()
-* []()
-
+* [Streamr](https://streamr.network/)
+* [ReactJS](https://reactjs.org/)
+* [FontAwesome](https://fontawesome.com/)
 
 
 <!-- GETTING STARTED -->
@@ -107,40 +104,41 @@ To get a local copy up and running follow these simple steps.
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
+In order to build this package you will need NodeJS and Yarn installed on your machine.
 
-### Installation
+### Installation and local testing
 
 1. Clone the repo
    ```sh
    git clone https://github.com/github_username/repo_name.git
    ```
-2. Install NPM packages
+2. Install required packages
    ```sh
-   npm install
+   yarn install
    ```
-
-
+3. Generate a new stream in the form *0x000.../name* and give it anonymous publishing permissions
+   ```sh
+   yarn create-stream -k YOUR_PRIVATE_KEY -a YOUR_WALLET_ADDRESS -s YOUR_STREAM_NAME
+   ```
+4. Replace the stream ID (*0x000.../name*) in App.jsx line 7
+  ```
+  const STREAM_ID = "your stream ID"
+  ```
+5. Execute the demo app
+   ```sh
+   yarn start
+   ```
 
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
-
-
-
-<!-- ROADMAP -->
-## Roadmap
-
-See the [open issues](https://github.com/github_username/repo_name/issues) for a list of proposed features (and known issues).
-
-
+To use this package in your (d)app simply install it with `yarn add @streamr-chatbox` 
+and then import it locally using `import Chatbox from "streamr-chatbox"`
+finally instantiate the component passing the required params `<Chatbox provider={injectedProvider} address={address} streamID={STREAM_ID} />`.
+The component needs the following parameters to work:
+* *provider*: web3 provider (MetaMask, WalletConnect, Web3Modal, ...)
+* *address*: (the user address in hexadecimal form as a string)
+* *streamID*: your generated stream ID as a string in the form "0x000.../name"
 
 <!-- CONTRIBUTING -->
 ## Contributing
@@ -158,14 +156,12 @@ Contributions are what make the open source community such an amazing place to l
 <!-- LICENSE -->
 ## License
 
-Distributed under the MIT License. See `LICENSE` for more information.
-
+Distributed under the GPLv3 License. See `LICENSE` for more information.
 
 
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email
 
 Project Link: [https://github.com/github_username/repo_name](https://github.com/github_username/repo_name)
 
@@ -177,8 +173,6 @@ Project Link: [https://github.com/github_username/repo_name](https://github.com/
 * []()
 * []()
 * []()
-
-
 
 
 
