@@ -39,10 +39,7 @@
   <h3 align="center">Streamr decentralised chatbox</h3>
 
   <p align="center">
-    A simple plug&play ReactJS module to add a fully-decentralised and permissionless chatbox powered by [Streamr](https://streamr.network/).
-    <br />
-    <a href="https://github.com/github_username/repo_name"><strong>Explore the docs »</strong></a>
-    <br />
+    A simple plug&play ReactJS module to add a fully-decentralised and permissionless chatbox powered by Streamr.
     <br />
     <a href="https://github.com/github_username/repo_name">View Demo</a>
     ·
@@ -71,14 +68,12 @@
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgements">Acknowledgements</a></li>
   </ol>
 </details>
-
 
 
 <!-- ABOUT THE PROJECT -->
@@ -121,7 +116,7 @@ In order to build this package you will need NodeJS and Yarn installed on your m
    yarn create-stream -k YOUR_PRIVATE_KEY -a YOUR_WALLET_ADDRESS -s YOUR_STREAM_NAME
    ```
 4. Replace the stream ID (*0x000.../name*) in App.jsx line 7
-  ```
+  ```sh
   const STREAM_ID = "your stream ID"
   ```
 5. Execute the demo app
@@ -132,9 +127,11 @@ In order to build this package you will need NodeJS and Yarn installed on your m
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-To use this package in your (d)app simply install it with `yarn add @streamr-chatbox` 
-and then import it locally using `import Chatbox from "streamr-chatbox"`
-finally instantiate the component passing the required params `<Chatbox provider={injectedProvider} address={address} streamID={STREAM_ID} />`.
+To use this package in your (d)app simply:
+1. install it with `yarn add @streamr-chatbox` 
+2. import it locally using `import Chatbox from "streamr-chatbox"`
+3. instantiate the component passing the required params `<Chatbox provider={injectedProvider} address={address} streamID={STREAM_ID} />`
+
 The component needs the following parameters to work:
 * *provider*: web3 provider (MetaMask, WalletConnect, Web3Modal, ...)
 * *address*: (the user address in hexadecimal form as a string)
@@ -150,7 +147,6 @@ Contributions are what make the open source community such an amazing place to l
 3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
-
 
 
 <!-- LICENSE -->
