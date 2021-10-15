@@ -82,7 +82,7 @@
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
 
 Simply sign the challenge with your preferred wallet provider and you are ready to chat!
-If you got a ENS name for your wallet, it will be used on behalf of your wallet address. Chats are ephemeral, not logged or stored anywhere. Due to the decentralised nature of the tool, the content posted by users cannot be subject to moderation.
+If you got an ENS name for your wallet, it will be used on behalf of your wallet address. Chats are ephemeral, not logged or stored anywhere. Due to the decentralised nature of the tool, the content posted by users cannot be subject to moderation.
 The chat supports all UTF-8 characters and is language-agnostic. For security reasons you cannot use BBCode or HTML code, any spurious tag will be stripped out.
 
 ### Built With
@@ -105,11 +105,11 @@ In order to build this package you will need NodeJS and Yarn installed on your m
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/github_username/repo_name.git
+   git clone https://github.com/grcasanova/Streamr-Chatbox.git
    ```
 2. Install required packages
    ```sh
-   yarn install
+   yarn
    ```
 3. Generate a new stream in the form *0x000.../name* and give it anonymous publishing permissions
    ```sh

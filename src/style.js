@@ -1,5 +1,11 @@
+// first of all I am thinking whether we do really need styled-components
+// as there is not so much styling going on in the package
+// Avoiding the styled-components would results in this project
+// being a npm-package that would not weight so much
+
 import styled, { keyframes } from "styled-components";
 
+// is it used anywhere? 
 const fadeinout = keyframes`
 0% {
     opacity: 0.6;
@@ -12,6 +18,7 @@ const fadeinout = keyframes`
   }
 `;
 
+// is it used anywhere? 
 const display = keyframes`
 0% {
     opacity: 0.2;
@@ -24,6 +31,9 @@ const display = keyframes`
   }
   `;
 
+
+// is !important really needed here, it is considered bad practice
+// when it turns out not to be essential  
 export const ChatboxBase = styled.div`
   word-wrap: break-word !important;
   font-family: "Lato", sans-serif;
@@ -273,6 +283,7 @@ export const ChatboxPopup = styled.section`
   position: absolute;
   box-shadow: 5px 5px 25px 0 rgba(46, 61, 73, 0.2);
   flex-direction: column;
+  /* repeated display property */ 
   display: none;
   bottom: 84px;
   right: 16px;
