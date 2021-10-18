@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import StreamrClient from "streamr-client";
 import PropTypes from "prop-types";
 import DOMPurify from "dompurify";
@@ -38,6 +38,7 @@ function Chatbox({ theme, provider, address, streamID, DEBUG = true }) {
   const [messages, setMessages] = useState([]);
   const [text, setText] = useState("");
   const [client, setClient] = useState();
+  const anchorRef = useRef();
 
   useEffect(() => {
     const subscribeToStream = async () => {
@@ -73,6 +74,7 @@ function Chatbox({ theme, provider, address, streamID, DEBUG = true }) {
           };
 
           setMessages((messages) => [...messages, msg]);
+          anchorRef.current.scrollIntoView({ behavior: "smooth" });
         }
       );
 
@@ -305,6 +307,7 @@ function Chatbox({ theme, provider, address, streamID, DEBUG = true }) {
                   )}
                 </ClearFix>
               ))}
+              <div ref={anchorRef}></div>
             </MsgList>
           </ChatBoxPopupHistory>
         </ChatboxPopupMain>
