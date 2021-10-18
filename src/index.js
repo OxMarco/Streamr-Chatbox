@@ -34,11 +34,26 @@ import {
 
 library.add(faComment, faTimes, faUserCircle, faWindowMaximize, faWindowRestore, faPaperPlane);
 
+// theme is not used anywhere, matter of code practices but I usually omit such value
 function Chatbox({ theme, provider, address, streamID, DEBUG = true }) {
   const [messages, setMessages] = useState([]);
   const [text, setText] = useState("");
   const [client, setClient] = useState();
 
+  // do the setStates above useEffect, just to make the code easier to read
+  const [panel, setPanel] = useState(false);
+  const [popup, setPopup] = useState(false);
+  const [open, setOpen] = useState(true);
+  const [close, setClose] = useState(false);
+  const [max, setMax] = useState(false);
+
+  // a side not, there are quite a lot of setStates in the component
+  // perhaps just to make it easier to handle in future, it would better
+  // be to introduce some machine state here (xState etc. ?)
+
+  // not sure of the specifics of streams here, but dont we want to 
+  // unsubscribe on unmount ? If so then return callback from useEffect
+  // https://stackoverflow.com/questions/55020041/react-hooks-useeffect-cleanup-for-only-componentwillunmount
   useEffect(() => {
     const subscribeToStream = async () => {
       const stream = new StreamrClient({
@@ -49,7 +64,12 @@ function Chatbox({ theme, provider, address, streamID, DEBUG = true }) {
 
       setClient(stream);
 
-      if (DEBUG) console.log("Subscribing...");
+      // please add brackets after if {}, will be less prone to errors
+      // and following the best practices
+      // btw do we want to do the console logs in external npm package ? 
+      if (DEBUG) { 
+        console.log("Subscribing...");
+      }
 
       await stream.subscribe(
         {
@@ -58,7 +78,8 @@ function Chatbox({ theme, provider, address, streamID, DEBUG = true }) {
         (message, metadata) => {
           console.log("message received", metadata);
 
-          var cleanText = DOMPurify.sanitize(message.msg);
+          // const instead of var ! 
+          const cleanText = DOMPurify.sanitize(message.msg);
           const from = metadata.messageId.publisherId;
           const relativeTime = new RelativeTime();
           const time = relativeTime.from(
@@ -67,7 +88,7 @@ function Chatbox({ theme, provider, address, streamID, DEBUG = true }) {
 
           const msg = {
             self: from === address.toLowerCase() ? true : false,
-            from: from,
+            from, // not needed from: from 
             text: cleanText,
             when: time,
           };
@@ -84,12 +105,6 @@ function Chatbox({ theme, provider, address, streamID, DEBUG = true }) {
   // Handle popup events
 
   // Open = true &&
-
-  const [panel, setPanel] = useState(false);
-  const [popup, setPopup] = useState(false);
-  const [open, setOpen] = useState(true);
-  const [close, setClose] = useState(false);
-  const [max, setMax] = useState(false);
 
   const handleMaximise = () => {
     setMax(true);
@@ -206,7 +221,10 @@ function Chatbox({ theme, provider, address, streamID, DEBUG = true }) {
   };
 
   const handleSubmit = async () => {
-    if (DEBUG) console.log("Publishing message: " + text);
+
+    if (DEBUG) { 
+      console.log("Publishing message: " + text);
+    }
     const message = {
       msg: text,
     };
@@ -215,7 +233,9 @@ function Chatbox({ theme, provider, address, streamID, DEBUG = true }) {
 
     setText("");
 
-    if (DEBUG) console.log("message sent");
+    if (DEBUG) {
+      console.log("message sent");
+    }
   };
 
   useEffect(() => {
@@ -231,10 +251,13 @@ function Chatbox({ theme, provider, address, streamID, DEBUG = true }) {
       }
     };
     document.addEventListener("keydown", listener);
+    
     return () => {
       document.removeEventListener("keydown", listener);
     };
-  });
+  }, []);
+  // do we want to do that on every rerender ? if no the add [] as second 
+  // argument in useEffect
 
   return (
     <ChatboxBase>
@@ -372,7 +395,7 @@ function Chatbox({ theme, provider, address, streamID, DEBUG = true }) {
               )}
               {messages.map((message, index) => (
                 <ClearFix key={index}>
-                  {message.self && (
+                  {message.self ? (
                     <div>
                       <MessageSelfData>
                         <small>{message.when}</small>&nbsp;&nbsp;&nbsp;
@@ -381,9 +404,8 @@ function Chatbox({ theme, provider, address, streamID, DEBUG = true }) {
                         </span>
                       </MessageSelfData>
                       <MessageSelf>{message.text}</MessageSelf>
-                    </div>
-                  )}
-                  {!message.self && (
+                    </div> )
+                  : (
                     <div>
                       <MessageData>
                         <span>
